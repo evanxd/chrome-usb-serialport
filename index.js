@@ -43,7 +43,17 @@
       this._isOpened = true;
       this.emit('open');
     }
-    this.emit('data', info.data);
+    var data = new Uint8Array(this._parseHexString(info.data));
+    this.emit('data', data);
+  };
+
+  ChromeUsbSerialport.prototype._parseHexString = function(string) {
+    var arrayBuffer = new ArrayBuffer(Math.ceil(string.length / 2));
+    var uint8Array = new Uint8Array(arrayBuffer);
+    for (var i = 0; i < string.length; i += 2) {
+      uint8Array[i / 2] = parseInt(string.substr(i, 2), 16);
+    }
+    return arrayBuffer;
   };
 
   ChromeUsbSerialport.prototype.write = function(data, callback) {
