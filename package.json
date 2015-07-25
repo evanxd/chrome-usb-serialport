@@ -1,6 +1,6 @@
 {
   "name": "chrome-usb-serialport",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/evanxd/chrome-usb-serialport",
   "authors": [
     "Evan Tseng <evan@tseng.io>"
