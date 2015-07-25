@@ -1,0 +1,19 @@
+{
+  "name": "chrome-usb-serialport",
+  "version": "0.0.1",
+  "homepage": "https://github.com/evanxd/chrome-usb-serialport",
+  "authors": [
+    "Evan Tseng <evan@tseng.io>"
+  ],
+  "description": "A serialport module for Google Chrome browser.",
+  "keywords": [
+    "arduino",
+    "chrome",
+    "johnny-five",
+    "serial"
+  ],
+  "license": "Apache License 2.0",
+  "dependencies": {
+    "chrome-app-api-proxy": "0.0.1"
+  }
+}
