@@ -2,12 +2,10 @@
 'use strict';
 
 (function(exports) {
-  var EXTENSION_ID = 'mncdajaedfblonbkmodofckdialkolgk';
-
   function ChromeUsbSerialport(path, options, openImmediately, callback) {
-    this._chrome = new ChromeApiProxy(EXTENSION_ID);
     this.path = path;
     this.options = options;
+    this._chrome = new ChromeApiProxy(options.extensionId);
     openImmediately && this.open(callback);
   }
 
