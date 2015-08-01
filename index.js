@@ -20,10 +20,30 @@
   ChromeUsbSerialport.prototype.open = function(callback) {
     var that = this;
     var chrome = this._chrome;
-    var options = {
-      bitrate: this.options.baudRate
-    };
-    chrome.call('chrome.serial.connect', this.path, options)
+    var promise;
+    if (this.path) {
+      promise = new Promise.resolve(this.path);
+    } else {
+      promise = chrome.call('chrome.serial.getDevices')
+      .then(function(devices) {
+        var path;
+        // Search devices array
+        // and return the last found arduino device.
+        // TODO: Support multiple devices.
+        devices.forEach(function(device) {
+          if (device.path.match('cu.usbmodem')) {
+            path = device.path;
+          }
+        });
+        return Promise.resolve(path);
+      });
+    }
+    promise.then(function(path) {
+      var options = {
+        bitrate: that.options.baudRate
+      };
+      return chrome.call('chrome.serial.connect', path, options);
+    })
     .then(function(info) {
       that._connectionId = info.connectionId;
       chrome.listenSerialPort(that._onData.bind(that));
