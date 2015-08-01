@@ -47,6 +47,7 @@
     .then(function(info) {
       that._connectionId = info.connectionId;
       chrome.listenSerialPort(that._onData.bind(that));
+      // XXX: Workaround to wait for arduino board is ready.
       setTimeout(function() {
         if(!that._isOpened) {
           that._isOpened = true;
